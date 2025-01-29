@@ -33,14 +33,16 @@ x = sd.fit_transform(x)
 x_train,x_test,y_train,y_test = train_test_split(x,y,test_size=0.2,random_state=42)
  
 
-n_estimators = 100
-max_depth = 3
+gm = 1.5
+c = 0.1
+kernel = 'poly'
 
-mlflow.set_experiment('machine_fault_RD')
+mlflow.set_experiment('machine_fault_SVC')
 
-with mlflow.start_run(run_name='Rd with est = 100'):
+with mlflow.start_run(run_name='svc with kern = poly'):
 
-    model = RandomForestClassifier(n_estimators=n_estimators,max_depth=max_depth)
+    model = SVC(gamma=gm,kernel=kernel,C=c)
+    
 
 
 
@@ -69,8 +71,9 @@ with mlflow.start_run(run_name='Rd with est = 100'):
     # mlflow.log_metric('Confusion_metrics',CM)
     # mlflow.log_metric('Confusion_report',CR)
 
-    mlflow.log_param('n_estimators',n_estimators)
-    mlflow.log_param('max_depth',max_depth)
+    mlflow.log_param('Gamma',gm)
+    mlflow.log_param('C',c)
+    mlflow.log_param('kernel',kernel)
 
     mlflow.sklearn.log_model(model,'Decision tree model')
 
