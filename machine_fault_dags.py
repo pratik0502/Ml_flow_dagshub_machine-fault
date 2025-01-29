@@ -9,10 +9,12 @@ import mlflow.sklearn
 from sklearn.ensemble import RandomForestClassifier
 import matplotlib.pyplot as plt
 
-import dagshub
-dagshub.init(repo_owner='pratik0502', repo_name='Ml_flow_dagshub_machine-fault', mlflow=True)
+# import dagshub
+# dagshub.init(repo_owner='pratik0502', repo_name='Ml_flow_dagshub_machine-fault', mlflow=True)
 
-mlflow.set_tracking_uri('https://dagshub.com/pratik0502/Ml_flow_dagshub_machine-fault.mlflow')
+# mlflow.set_tracking_uri('https://dagshub.com/pratik0502/Ml_flow_dagshub_machine-fault.mlflow')
+mlflow.set_tracking_uri('http://ec2-16-170-236-218.eu-north-1.compute.amazonaws.com:5000/')
+
 
 
 import mlflow
@@ -31,12 +33,12 @@ x = sd.fit_transform(x)
 x_train,x_test,y_train,y_test = train_test_split(x,y,test_size=0.2,random_state=42)
  
 
-n_estimators = 60
-max_depth = 4
+n_estimators = 100
+max_depth = 3
 
 mlflow.set_experiment('machine_fault_RD')
 
-with mlflow.start_run(run_name='Rd with est = 60'):
+with mlflow.start_run(run_name='Rd with est = 100'):
 
     model = RandomForestClassifier(n_estimators=n_estimators,max_depth=max_depth)
 
