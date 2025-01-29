@@ -9,6 +9,17 @@ import mlflow.sklearn
 from sklearn.ensemble import RandomForestClassifier
 import matplotlib.pyplot as plt
 
+import dagshub
+dagshub.init(repo_owner='pratik0502', repo_name='Ml_flow_dagshub_machine-fault', mlflow=True)
+
+mlflow.set_tracking_uri('https://dagshub.com/pratik0502/Ml_flow_dagshub_machine-fault.mlflow')
+
+
+import mlflow
+with mlflow.start_run():
+  mlflow.log_param('parameter name', 'value')
+  mlflow.log_metric('metric name', 1)
+
 data = pd.read_csv(r"D:\ML_ops\archive\data.csv")
 
 x = data.iloc[:,:-1]
